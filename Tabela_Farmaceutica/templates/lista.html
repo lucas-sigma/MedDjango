@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MedDjango | Lista de Medicamentos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding: 2rem 0 5rem 0;">
+    <!--<ul>
+        <li><a href="{% url 'add' %}">Adicionar Medicamento</a></li>
+    </ul>-->
+
+    <div class="container mt-3 rounded border border-primary" style="padding: 2rem;">
+
+        <input class="form-control" id="myInput" type="text" placeholder="Buscar...">
+        <div class="container mt-3 rounded border border-info" style="padding: 2rem;">
+            <div id="accordion">
+                {% for medicamento in medicamentos %}
+                <div class="card">
+                    <div class="card-header medicamento"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-0">{{ medicamento.medicamento }}</a></div>
+
+                    <div id="collapse-{{medicamento.id}}-0" class="collapse">
+                        <div class="card-body">
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-1">Para
+                                        Que Serve</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-1" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">{{ medicamento.para_que_serve }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-2">Contraindicação</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-2" class="collapse" data-parent="#accordion">
+                                    <div class="card-body"> {{ medicamento.contraindicacao }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-3">Como
+                                        Usar</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-3" class="collapse" data-parent="#accordion">
+                                    <div class="card-body"> {{ medicamento.como_usar }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-4">Precauções</a>
+                                </div>
+
+                                <div id="collapse-{{medicamento.id}}-4" class="collapse" data-parent="#accordion">
+                                    <div class="card-body"> {{ medicamento.precaucoes }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-5">Reações
+                                        Adversas</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-5" class="collapse" data-parent="#accordion">
+                                    <div class="card-body"> {{ medicamento.reacoes_adversas }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-6">Riscos</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-6" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">{{ medicamento.riscos }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-7">Interação
+                                        Medicamentosa</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-7" class="collapse" data-parent="#accordion">
+                                    <div class="card-body"> {{ medicamento.interacao_med }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-8">Interação
+                                        Alimentícia</a></div>
+
+                                <div id="collapse-{{medicamento.id}}-8" class="collapse" data-parent="#accordion">
+                                    <div class="card-body"> {{ medicamento.interacao_alimenticia }}</div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse-{{medicamento.id}}-9">Ação
+                                        da Substância</a></div>
+                                <div id="collapse-{{medicamento.id}}-9" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">{{ medicamento.acao_da_substancia }}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>{% endfor %}
+            </div>
+        </div></div>
+
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#accordion .medicamento").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MedDjango | Lista de Medicamentos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'add' %}">Adicionar Medicamento</a></li>
+    </ul>
+
+    <div class="container-mt3">
+        <input class="form-control" id="myInput" type="text" placeholder="Buscar..">
+        <table class="table table-bordered">
+            <tbody id="myTable">
+            {% for medicamento in medicamentos %}
+                    <div id="accordion">
+                        <tr>
+                        <div class="card">
+                            <td><div class="card-header">{{ medicamento.medicamento }}</div></td>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                            <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse1">Para Que Serve</a></div>
+                            
+                            <div id="collapse1" class="collapse show" data-parent="#accordion">{{ medicamento.para_que_serve }}</div>
+                            </td>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse2">Contraindicação</a></div>
+                                
+                                <div id="collapse2" class="collapse show" data-parent="#accordion">{{ medicamento.contraindicacao }}</div>
+                                </td>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse3">Como Usar</a></div>
+                                
+
+                                <div id="collapse3" class="collapse show" data-parent="#accordion">{{ medicamento.como_usar }}</div>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                            <div class="card-header">
+                                <td><a class="card-link" data-toggle="collapse" href="#collapse4">Precauções</a></div>
+                                
+
+                                <div id="collapse4" class="collapse show" data-parent="#accordion">{{ medicamento.precaucoes }}</div>
+                                </td>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse5">Reações Adversas</a></div>
+                                
+                                
+                                <div id="collapse5" class="collapse show" data-parent="#accordion">{{ medicamento.reacoes_adversas }}</div>
+                                </td>
+                            </div>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse6">Riscos</a></div>
+                                
+                                
+                                <div id="collapse6" class="collapse show" data-parent="#accordion">{{ medicamento.riscos }}</div></td>
+                            </div>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse7">Interação Medicamentosa</a></div>
+                                
+                                
+                                <div id="collapse7" class="collapse show" data-parent="#accordion">{{ medicamento.interacao_med }}</div></td>
+                            </div>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse8">Interação Alimentícia</a></div>
+                                
+                                
+                                <div id="collapse8" class="collapse show" data-parent="#accordion">{{ medicamento.interacao_alimenticia }}</div></td>
+                            </div>
+                        </div>
+                        </tr>
+                        <tr>
+                        <div class="card">
+                                <td><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse9">Ação da Substância</a></div>
+                                
+                                
+                                <div id="collapse9" class="collapse show" data-parent="#accordion">{{ medicamento.acao_da_substancia }}</div></td>
+                            </div>
+                        </div>
+                        </tr>
+                    </div>
+                
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+</body>
+</html>
