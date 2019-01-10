@@ -1,1 +1,8 @@
 venv
+*pyc
+.vEnv
+.sqlite3
+img
+.vscode
+.idea
+heroku.txt
